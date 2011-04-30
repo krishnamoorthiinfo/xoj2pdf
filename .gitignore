@@ -2,3 +2,9 @@ bin/com/droberts/xoj/Loader.class
 bin/com/droberts/xoj/Main.class
 bin/com/droberts/xoj/Loader.class
 bin/com/droberts/xoj/Main.class
+bin/com/droberts/xoj/DrawingSurface.class
+bin/com/droberts/xoj/Page.class
+bin/com/droberts/xoj/PageGenerator.class
+bin/com/droberts/xoj/PagePoint.class
+bin/com/droberts/xoj/Stroke.class
+test.png

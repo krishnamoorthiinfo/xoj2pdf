@@ -11,6 +11,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
 
 /**
  * Loads an XOJ file
@@ -24,8 +31,10 @@ public class Loader
 	/**
 	 * Load from a given filename
 	 * @param filename filename to load from
+	 * @throws ParserConfigurationException parser error (in XML)
+	 * @throws SAXException SAX exception (in XML)
 	 */
-	public void load(String filename)
+	public Document load(String filename) throws ParserConfigurationException, SAXException
 	{
 		try 
 		{
@@ -53,8 +62,20 @@ public class Loader
 	        
 	        // Kill of creation of temp xml
 	        extracted.close();
+	       
+	        // Create factory et al. to parse the xml
+	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	        factory.setNamespaceAware(true); 
+	       
+	        // Parse the document
+	        DocumentBuilder builder = factory.newDocumentBuilder();
+			Document xml = builder.parse(temp.getAbsolutePath());
 			
-			
+			// Normalize
+			xml.getDocumentElement().normalize();
+
+			// Done.
+			return xml;
 		} 
 		catch (IOException e) 
 		{
@@ -62,7 +83,6 @@ public class Loader
 			// 
 			throw new RuntimeException("Failed to load from " + filename + " - does not exist or not a .XOJ? ");
 		}
-		
 	}
 
 }
