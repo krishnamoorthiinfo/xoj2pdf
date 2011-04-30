@@ -6,8 +6,14 @@ package com.droberts.xoj.imaging;
 
 import gnu.jpdf.PDFJob;
 
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
+import java.awt.RenderingHints;
+import java.awt.geom.GeneralPath;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,6 +57,10 @@ public class Exporter
 	 */
 	public void renderPages(List<Page> pageData)
 	{
+		Graphics2D graphics = (Graphics2D) OutputRenderer.getRendererGraphics();
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		
 		for(Page p : pageData)
 		{
 			// We're rendering...
@@ -80,7 +90,7 @@ public class Exporter
 		// Iterate each stroke
 		for (Stroke s : strokes)
 		{
-			drawStroke(s, drawGraphics);
+			drawStroke(s, (Graphics2D)drawGraphics);
 		}
 		
 		OutputRenderer.moveToNextPage();
@@ -90,36 +100,22 @@ public class Exporter
 	 * Draw a single stroke
 	 * @param stroke stroke to draw
 	 */
-	private void drawStroke(Stroke stroke, Graphics graphics)
+	private void drawStroke(Stroke stroke, Graphics2D graphics)
 	{
 		// Get all positions
 		List<PagePoint> positions = stroke.getPosition();
-		
-		// Get all widths 
-		double[] widths = stroke.getWidth();
-		
-		// Get graphics to draw with 
-		graphics.setColor(Color.black);
 
-		// Store the initial width in case we run out
-		double defaultWidth = 0;
+		GeneralPath gp = new GeneralPath();
+		gp.moveTo(positions.get(0).getX(), positions.get(0).getY());
 		
-		// Iterate all positions
-		for (int i = 0 ; i < positions.size(); i++)
-		{		
-			double widthToDraw = 0;
-			
-			if (i < widths.length)
-			{
-				widthToDraw = widths[i];
-				defaultWidth = widthToDraw;
-			} else {
-				widthToDraw = defaultWidth;
-			}
-			
-			graphics.fillOval((int)positions.get(i).getX(), (int)positions.get(i).getY(), 
-					(int)widthToDraw*2, (int)widthToDraw*2);
+		for (int i = 0; i < positions.size(); i++)
+		{
+			gp.lineTo(positions.get(i).getX(), positions.get(i).getY());
 		}
-	
+		
+		graphics.setColor(stroke.getColour());
+		graphics.setStroke( new BasicStroke((float)stroke.getWidth()[0]));
+		
+		graphics.draw(gp);
 	}
 }

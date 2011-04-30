@@ -4,6 +4,7 @@
  */
 package com.droberts.xoj.format;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,16 @@ public class Stroke
 	private List<PagePoint> pathPosition;
 	
 	/**
+	 * Name of the tool this stroke is from
+	 */
+	private String Tool;
+	
+	/**
+	 * Colour to draw the stroke with
+	 */
+	private Color DrawColor;
+	
+	/**
 	 * Create a stroke with the given attributes (presumed to be string sequences
 	 * from XML)
 	 * @param tool tool name reflecting stroke tag's tool name 
@@ -36,11 +47,37 @@ public class Stroke
 	 */
 	public Stroke(String tool, String colour, String widthSequence, String posSequence)
 	{
-		// TODO: Tool and colour
+		// Record tool
+		Tool = tool;
 		
+		if (colour.equalsIgnoreCase("yellow"))
+		{
+			DrawColor = new Color(255,255,0);
+		} else {
+			DrawColor = new Color(0, 0, 0);
+		}
+	
 		// Save path width and position
-		pathWidth = getSequence(widthSequence);
+		pathWidth = recalculateWidths(getSequence(widthSequence));
 		pathPosition = getPointSequence(posSequence);
+	}
+	
+	/**
+	 * Get the colour in use
+	 * @return colour to draw the stroke as
+	 */
+	public Color getColour()
+	{
+		return DrawColor;
+	}
+	
+	/**
+	 * Get the name of the tool in use
+	 * @return tool name
+	 */
+	public String getTool()
+	{
+		return Tool;
 	}
 	
 	/**
@@ -59,6 +96,28 @@ public class Stroke
 	public List<PagePoint> getPosition()
 	{
 		return pathPosition;
+	}
+	
+	/**
+	 * Reclaulcate widths as per docs of Xournal:
+	 * " succession of floating-point values: first the nominal brush width, and then the width of each successive segment forming the stroke."
+	 * 
+	 * @param widths original width values
+	 * @return recalculated widths (in relation to nominal)
+	 */
+	private double[] recalculateWidths(double[] widths)
+	{
+		// Store nominal
+		double nominal = widths[0];
+		
+		// Run through remainder
+		for (int i = 1; i < widths.length; i++)
+		{
+			widths[i] /= nominal; 
+		}
+		
+		return widths;
+		
 	}
 	
 	/**

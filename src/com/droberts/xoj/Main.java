@@ -32,7 +32,7 @@ public class Main
 		
 		try 
 		{
-			Document d = loader.load("/Users/droberts/Dropbox/Xournal Notes/Year2/SoftEng/Process/3.xoj");
+			Document d = loader.load("/Users/droberts/Dropbox/Xournal Notes/Year1/Raw/fcs-1/sets-1.xoj");
 			
 			PageGenerator gen = new PageGenerator(d);
 		
