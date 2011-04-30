@@ -2,7 +2,7 @@
  * XOJ 
  * 
  */
-package com.droberts.xoj;
+package com.droberts.xoj.format;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +17,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import com.droberts.xoj.Progress;
 
 
 /**
@@ -36,6 +38,8 @@ public class Loader
 	 */
 	public Document load(String filename) throws ParserConfigurationException, SAXException
 	{
+		Progress.onStartFile(filename);
+		
 		try 
 		{
 			// Open up the XOJ (zip)

@@ -8,3 +8,13 @@ bin/com/droberts/xoj/PageGenerator.class
 bin/com/droberts/xoj/PagePoint.class
 bin/com/droberts/xoj/Stroke.class
 test.png
+bin/com/droberts/xoj/Progress.class
+bin/com/droberts/xoj/format/Loader.class
+bin/com/droberts/xoj/format/Page.class
+bin/com/droberts/xoj/format/PageGenerator.class
+bin/com/droberts/xoj/format/PagePoint.class
+bin/com/droberts/xoj/format/Stroke.class
+bin/com/droberts/xoj/imaging/Exporter.class
+bin/com/droberts/xoj/imaging/Renderer.class
+bin/com/droberts/xoj/imaging/pdf/PdfRenderer.class
+output.pdf

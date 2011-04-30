@@ -5,12 +5,18 @@
  */
 package com.droberts.xoj;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import com.droberts.xoj.format.Loader;
+import com.droberts.xoj.format.PageGenerator;
+import com.droberts.xoj.imaging.Exporter;
+import com.droberts.xoj.imaging.pdf.PdfRenderer;
 
 /**
  * Entry point
@@ -31,8 +37,8 @@ public class Main
 			PageGenerator gen = new PageGenerator(d);
 		
 			
-			DrawingSurface ds = new DrawingSurface();
-			ds.draw(gen.paginate().get(0));
+			Exporter ds = new Exporter(new PdfRenderer("output.pdf"));
+			ds.renderPages(gen.paginate());
 			
 		} 
 		catch (ParserConfigurationException e) 
@@ -41,6 +47,11 @@ public class Main
 			e.printStackTrace();
 		} 
 		catch (SAXException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (FileNotFoundException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,13 +2,15 @@
  * XOJ
  * 
  */
-package com.droberts.xoj;
+package com.droberts.xoj.format;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+
+import com.droberts.xoj.Progress;
 
 /**
  * Given the entirety of the Xournal XML, 
@@ -38,6 +40,8 @@ public class PageGenerator
 	 */
 	public List<Page> paginate()
 	{
+		Progress.onPaginating();
+		
 		// Get a node of all pages
 		NodeList xmlPages = Xml.getElementsByTagName("page");
 		

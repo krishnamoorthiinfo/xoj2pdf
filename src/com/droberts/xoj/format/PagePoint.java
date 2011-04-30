@@ -2,7 +2,7 @@
  * XOJ
  * 
  */
-package com.droberts.xoj;
+package com.droberts.xoj.format;
 
 /**
  * An extremely simple point class
