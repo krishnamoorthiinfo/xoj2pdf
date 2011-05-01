@@ -12,7 +12,7 @@ idea to do this anyway)
 
 *Download*
 
-The current JAR is available from the downloads button the top right
+The current JAR is available from the downloads button on the top right
 
 *Format support*
 
