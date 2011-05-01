@@ -19,10 +19,11 @@ public class Progress
 	/**
 	 * When conversion reaches a given filename
 	 * @param filename filename reached
+	 * @param destination where the file is being saved to
 	 */
-	public static void onStartFile(String filename)
+	public static void onStartFile(String filename, String destination)
 	{
-		System.out.println("Starting " + filename);
+		System.out.println("Starting " + filename + " (saving output to " + destination + ")");
 		
 		// Reset page 
 		Page = 1;

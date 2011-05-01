@@ -38,8 +38,6 @@ public class Loader
 	 */
 	public Document load(String filename) throws ParserConfigurationException, SAXException
 	{
-		Progress.onStartFile(filename);
-		
 		try 
 		{
 			// Open up the XOJ (zip)
