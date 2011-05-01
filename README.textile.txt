@@ -1,0 +1,29 @@
+xoj2pdf batch converts Xournal .xoj files into .pdfs
+
+*Usage*
+
+<code>java -jar xoj2pdf.jar <input directory path> <output directory path></code>
+
+xoj2pdf will convert all .xojs in the given input folder, placing the output in the given
+destination folder (if a file is called hello.xoj it becomes hello.pdf, keeping its root name)
+
+Note that you may have to wrap directory paths in quotes to avoid slash ambiguity (generally a good
+idea to do this anyway)
+
+*Download*
+
+The current JAR is available from the downloads button the top right
+
+*Format support*
+
+xoj2pdf is nowhere near mature, and this mainly just fills a personal requirement. As such, the format 
+support is pretty abysmal at the moment.
+
+* Basic strokes: *YES*  (some lines may appear slightly more angular than normal)
+* Pressure sensitivity: *NO* (Currently uses first pressure value as entire stroke width)
+* Highlighter: *NO*  (opacity seems to be ignored by gnujpdf)
+* Text: *NO*
+* Colours: *NO* (besides yellow at the moment)
+* Eraser: *NO*  (appears a filled stroke areas)
+* Background: *NO* (just white for now)
+* Embedded PDFs: *NO* (no plans to support either)
