@@ -19,3 +19,4 @@ bin/com/droberts/xoj/imaging/Renderer.class
 bin/com/droberts/xoj/imaging/pdf/PdfRenderer.class
 output.pdf
 bin/com/droberts/xoj/Main$1.class
+xoj2pdf.jar
