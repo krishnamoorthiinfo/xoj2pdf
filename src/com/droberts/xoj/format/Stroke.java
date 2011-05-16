@@ -18,6 +18,11 @@ import java.util.List;
 public class Stroke 
 {
 	/**
+	 * Colour parser common to all strokes
+	 */
+	private static ColourParser colourParser = new ColourParser();
+	
+	/**
 	 * Width of the path as it varies over time
 	 */
 	private double[] pathWidth;
@@ -50,12 +55,8 @@ public class Stroke
 		// Record tool
 		Tool = tool;
 		
-		if (colour.equalsIgnoreCase("yellow"))
-		{
-			DrawColor = new Color(255,255,0);
-		} else {
-			DrawColor = new Color(0, 0, 0);
-		}
+		// Obtain appropriate colour
+		DrawColor = colourParser.parse(colour);
 	
 		// Save path width and position
 		pathWidth = recalculateWidths(getSequence(widthSequence));
