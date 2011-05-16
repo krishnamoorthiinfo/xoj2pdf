@@ -10,6 +10,18 @@ destination folder (if a file is called hello.xoj it becomes hello.pdf, keeping 
 Note that you may have to wrap directory paths in quotes to avoid slash ambiguity (generally a good
 idea to do this anyway)
 
+
+*Entire directory trees (recursive mode)*
+
+To use xoj2pdf to convert whole directory trees, use the -r switch like so:
+
+<code>java -jar xoj2pdf.jar <input directory path> <output directory path> -r</code>
+
+The directory structure (and all nested directories) will be built as an exact mirror
+rooted at the given output path. The only difference being that each .xoj will of course
+be a PDF in the output folders
+
+
 *Download*
 
 The current JAR is available from the downloads button on the top right
@@ -23,7 +35,7 @@ support is pretty abysmal at the moment.
 * Pressure sensitivity: *NO* (Currently uses first pressure value as entire stroke width)
 * Highlighter: *NO*  (opacity seems to be ignored by gnujpdf)
 * Text: *NO*
-* Colours: *NO* (besides yellow at the moment)
-* Eraser: *NO*  (appears a filled stroke areas)
+* Colours: *SOME* (Basic R/G/B/Y and black. More colours can be added easily)
+* Eraser: *NO*  (appears as filled stroke areas)
 * Background: *NO* (just white for now)
 * Embedded PDFs: *NO* (no plans to support either)
